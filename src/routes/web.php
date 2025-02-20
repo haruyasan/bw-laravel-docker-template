@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/todo', function () {   //HTTPメソッドのGETを示しており、getメソッドの第一引数がURIを示している。
+    echo 'Hello World!';
+});
