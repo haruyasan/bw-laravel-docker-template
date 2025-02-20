@@ -13,6 +13,6 @@ class TodoController extends Controller
         $todo = new Todo();
         $todos = $todo->all();  //allメソッドの返り値は、Illuminate\Database\Eloquent\Collectionクラスのインスタンス
 
-        return view('todo.index');
+        return view('todo.index', ['helloWorld' => 'hello World!']);
     }
 }
