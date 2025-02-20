@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {   //HTTPメソッドのGETを示しており、getメソッドの第一引数がURIを示している。
     return view('welcome');
 });
 
-Route::get('/todo', function () {   //HTTPメソッドのGETを示しており、getメソッドの第一引数がURIを示している。
-    echo 'Hello World!';
-});
+Route::get('/todo', 'TodoController@index');
