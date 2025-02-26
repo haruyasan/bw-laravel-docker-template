@@ -14,7 +14,7 @@
                   <div class="d-flex align-items-center p-2">
                     <span class="col-9">{{ $todo->content }}</span>
                       <a href="{{ route('todo.show', $todo->id) }}" class="btn btn-info ml-3">詳細</a> 
-                                                    <!--↑この部分が、URLのhttp://localhost:8080/todo/1の最後の1に相当している-->
+                                                    <!--↑この部分が、URLの/todo/1の最後の1に相当している-->
                                                     <!--これがweb.phpの/todo/{id}に紐づいており、さらにその値がToDoController.phpのshow()の引数に渡されている-->
                   </div>
                 @endforeach

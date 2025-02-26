@@ -27,6 +27,8 @@ Route::post('/todo', 'TodoController@store')->name('todo.store');
 
 Route::get('/todo/{id}', 'TodoController@show')->name('todo.show');
 
+Route::get('/todo/{id}/edit', 'TodoController@edit')->name('todo.edit');
+
 
 ///todo というURLパスに対して、TodoController の @〇〇メソッドを実行するルートを定義。
 //このルートに名前を付けている。

@@ -14,8 +14,6 @@ use App\Todo;                                       //todo.phpのtodoクラス�
 class TodoController extends Controller             //このクラスはApp\Http\Controllersという名前空間に属している。
                                                     // extendsのControllerは別ファイル「Controller.php」からクラスを引っ張っている
 {
-    private $todo;                                  //TodoControllerのクラスプロパティ
-
     public function index()
     {
         $todos = $this->todo->all();   //Todo.phpのTodoクラスをインスタンス化して、それを$todoという変数に代入する
@@ -42,12 +40,23 @@ class TodoController extends Controller             //このクラスはApp\Http
 
     public function show($id)
     {
-        $todo = $this->todo->find($id);             //$this->todoはTodoControllerのクラスプロパティ
+        $todo = $this->todo->find($id);
         return view('todo.show', ['todo' => $todo]);
     }
 
+    private $todo;                                  //TodoControllerのクラスプロパティ
+
     public function __construct(Todo $todo)
     {
-        $this->todo = $todo;                        //コンストラクタインジェクションで生成したTodoクラスのインスタンスをプロパティに代入
+        $this->todo = $todo;
+                                                    //コンストラクタインジェクションで生成したTodoクラスのインスタンスをプロパティに代入
     }                                               //→Todoクラスのインスタンスをコントローラ内で使いまわすことができる
+
+    public function edit($id)
+    {
+        $todo = $this->todo->find($id);
+        return view('todo.edit', ['todo' => $todo]);
+        dd($todo);
+    }
+
 }
