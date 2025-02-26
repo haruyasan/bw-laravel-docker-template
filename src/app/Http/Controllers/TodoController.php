@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;         
-
-use Illuminate\Http\Request;
-
 /*
  *Request...ユーザーがフォームを送信したり、APIリクエストを送る際に送られてくるデータ（例: パラメータやファイル）を取得したりするためのクラス。
  *HTTPリクエストは、例えばフォームに入力されたデータや、URLパラメータ、ヘッダー情報などが含まれ、データを簡単に操作したり、取得したりできる。
  */
-
+use App\Http\Requests\TodoRequest;
 use App\Todo;                                       //todo.phpのtodoクラスをインポートしている
 
 class TodoController extends Controller             //このクラスはApp\Http\Controllersという名前空間に属している。
@@ -28,7 +25,7 @@ class TodoController extends Controller             //このクラスはApp\Http
         return view('todo.create');     //bladeファイルの表示
     }
 
-    public function store(Request $request)
+    public function store(TodoRequest $request)
     {
         $inputs = $request->all();
 
@@ -58,13 +55,24 @@ class TodoController extends Controller             //このクラスはApp\Http
         return view('todo.edit', ['todo' => $todo]);
     }
 
-    public function update(Request $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
+    //更新処理
+    public function update(TodoRequest $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
     {
         $inputs = $request->all();
-        $todo = $this->todo->find($id);
-        $todo->fill($inputs)->save(); 
+        $todo = $this->todo->find($id);     //モデルに値をセットする
+        $todo->fill($inputs)->save();       //DBに保存する
 
         return redirect()->route('todo.show', $todo->id);
+    }
+
+    //エラーメッセージ
+    public function messages()
+    {
+        return [
+            // 入力欄のname属性.ルール => メッセージ
+            'content.required' => 'ToDoが入力されていません。',
+            'content.max' => 'ToDoは :max 文字以内で入力してください。',
+        ];
     }
 
 }
