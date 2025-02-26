@@ -40,7 +40,7 @@ class TodoController extends Controller             //このクラスはApp\Http
 
     public function show($id)
     {
-        $todo = $this->todo->find($id);
+        $todo = $this->todo->find($id);             //Todo モデル（ここでは$this->todo）を使って、指定した id に一致するデータベースのレコードを取得し、その結果を $todo に格納する
         return view('todo.show', ['todo' => $todo]);
     }
 
@@ -56,7 +56,15 @@ class TodoController extends Controller             //このクラスはApp\Http
     {
         $todo = $this->todo->find($id);
         return view('todo.edit', ['todo' => $todo]);
-        dd($todo);
+    }
+
+    public function update(Request $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
+    {
+        $inputs = $request->all();
+        $todo = $this->todo->find($id);
+        $todo->fill($inputs)->save(); 
+
+        return redirect()->route('todo.show', $todo->id);
     }
 
 }

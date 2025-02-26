@@ -5,8 +5,10 @@
     <div class="card">
       <div class="card-header">ToDo編集</div>
       <div class="card-body">
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('todo.update', $todo->id) }}"> <!--"todo.update" という名前のルートに、$todo->id を引数として渡し、対応するURLを取得する"-->
           @csrf
+          @method('PUT')        <!--PUTメソッドでリクエストを送信--><!--<input type="hidden" name="_method" value="PUT">と同じ！！-->
+                                <!--HTMLの仕様的に<form method="PUT">のようにPUTメソッドを指定することができない-->
           <div class="form-group row">
             <label for="name" class="col-md-4 col-form-label text-md-right">ToDo入力</label>
             <div class="col-md-6">
