@@ -58,7 +58,7 @@ class TodoController extends Controller             //このクラスはApp\Http
     //更新処理
     public function update(TodoRequest $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
     {
-        $inputs = $request->all();
+
         $todo = $this->todo->find($id);     //モデルに値をセットする
         $todo->fill($inputs)->save();       //DBに保存する
 
@@ -75,4 +75,11 @@ class TodoController extends Controller             //このクラスはApp\Http
         ];
     }
 
+    public function delete($id)
+    {
+        $todo = $this->todo->find($id);     //モデルに値をセットする
+        $todo->delete();
+
+        return redirect()->route('todo.index');
+    }
 }

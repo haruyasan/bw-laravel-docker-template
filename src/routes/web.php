@@ -31,6 +31,8 @@ Route::get('/todo/{id}/edit', 'TodoController@edit')->name('todo.edit');
 
 Route::put('/todo/{id}', 'TodoController@update')->name('todo.update');
 
+Route::delete('/todo/{id}', 'TodoController@delete')->name('todo.delete');
+
 
 ///todo というURLパスに対して、TodoController の @〇〇メソッドを実行するルートを定義。
 //このルートに名前を付けている。
